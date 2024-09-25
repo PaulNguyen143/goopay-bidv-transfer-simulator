@@ -58,7 +58,7 @@ interface IVietQr {
   crc: string;
 }
 
-const min = 1;
+const min = 0;
 const max = 499000000;
 
 const listSupportBanks = [
@@ -117,13 +117,12 @@ export default function App() {
     const data: any = {
       transId: Date.now().toString(),
       customerAcc: qrData?.consumer?.bankNumber,
-      amount: 100000,
+      amount: amount,
       billNumber: virtualAccountData?.billNumber || Date.now().toString(),
       remark: qrData?.additionalData?.purpose,
       fromBank: "Simulator",
       fromAcc: "sml1403",
-      fromAccName: "Simulator Account",
-      checksum: "cd241ef273fa6bc9f3ce59ddcc6a81cca113b5501246f146aa8a3fdc01b01451"
+      fromAccName: "Simulator Account"
     }
     data.checksum = createChecksum(`${data.transId}${data.amount}${data.customerAcc}${data.billNumber}`)
     const enviroment = params.get("env") || "stg";
